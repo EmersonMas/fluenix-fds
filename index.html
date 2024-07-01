@@ -3,42 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Chat</title>
+    <title>Formulário de Teste para Slack</title>
 </head>
 <body>
-    <form id="chatForm">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem" name="mensagem" required></textarea><br><br>
-        <button type="submit">Enviar</button>
+    <form id="slackForm">
+        <label for="message">Mensagem para Slack:</label>
+        <input type="text" id="message" name="message" required><br><br>
+        <button type="submit">Enviar para Slack</button>
     </form>
 
     <script>
-        document.getElementById('chatForm').addEventListener('submit', function(e) {
+        document.getElementById('slackForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const data = {
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                mensagem: document.getElementById('mensagem').value
-            };
+            const message = document.getElementById('message').value;
 
             fetch('https://hooks.slack.com/services/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', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ text: `Nome: ${data.nome}\nEmail: ${data.email}\nMensagem: ${data.mensagem}` })
+                body: JSON.stringify({ text: message })
             }).then(response => {
                 if (response.ok) {
-                    alert('Formulário enviado com sucesso!');
+                    alert('Mensagem enviada com sucesso para o Slack!');
                 } else {
-                    alert('Falha ao enviar formulário.');
+                    alert('Falha ao enviar mensagem para o Slack.');
                 }
             }).catch(error => {
-                alert('Erro ao enviar formulário: ' + error.message);
+                alert('Erro ao enviar mensagem para o Slack: ' + error.message);
             });
         });
     </script>
