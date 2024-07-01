@@ -30,13 +30,15 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ text: JSON.stringify(data) })
+                body: JSON.stringify({ text: `Nome: ${data.nome}\nEmail: ${data.email}\nMensagem: ${data.mensagem}` })
             }).then(response => {
                 if (response.ok) {
                     alert('Formulário enviado com sucesso!');
                 } else {
                     alert('Falha ao enviar formulário.');
                 }
+            }).catch(error => {
+                alert('Erro ao enviar formulário: ' + error.message);
             });
         });
     </script>
