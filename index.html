@@ -9,7 +9,7 @@
     <h1>Envie uma mensagem para o Slack</h1>
     <form id="slackForm">
         <label for="message">Mensagem:</label>
-        <textarea id="message" name="message" rows="4" cols="50"></textarea>
+        <textarea id="message" name="message" rows="4" cols="50" required></textarea>
         <br>
         <button type="submit">Enviar</button>
     </form>
@@ -18,7 +18,12 @@
         document.getElementById('slackForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const message = document.getElementById('message').value;
+            const message = document.getElementById('message').value.trim();
+            if (!message) {
+                alert('A mensagem não pode estar vazia.');
+                return;
+            }
+
             const webhookUrl = 'https://hooks.slack.com/services/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';
             
             fetch(webhookUrl, {
