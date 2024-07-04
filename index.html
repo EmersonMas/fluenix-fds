@@ -61,7 +61,7 @@
             });
 
             // Converte os dados para JSON
-            const jsonData = JSON.stringify(formObject);
+            const jsonData = JSON.stringify({ text: `Nome: ${formObject.name}, Email: ${formObject.email}, Mensagem: ${formObject.message}` });
 
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/1078f5728ranaagv4qsjmzbtxx66cu31';
@@ -72,9 +72,14 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: jsonData
+                body: `--data ${jsonData}`
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log('Sucesso:', data);
             })
