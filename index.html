@@ -83,12 +83,18 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 alert('Data sent successfully!');
                 console.log('Success:', data);
             })
             .catch((error) => {
+                alert('There was a problem with the submission: ' + error.message);
                 console.error('Error:', error);
             });
         });
