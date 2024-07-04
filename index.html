@@ -58,20 +58,19 @@
             formData.forEach((valor, chave) => {
                 formObject[key] = valor;
             });
-
-            Converte os dados para JSON
+            // Converte os dados para JSON
             const jsonData = JSON.stringify({ text: 'Nome: ${formObject.name}, E-mail: ${formObject.email}, Mensagem: ${formObject.mensagem}' });
-            Formatação dos dados para o texto simples
-            const formattedText = 'Nome: ${formObject.nome}\nE-mail: ${formObject.email}\nMensagem: ${formObject.mensagem}';
 
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/1078f5728ranaagv4qsjmzbtxx66cu31';
-@@ -72,7 +72,7 @@ <h1>Formulário de Contato</h1>
+
+            Envia os dados para o webhook
+            fetch(webhookUrl, {
+                método: 'POST',
                 cabeçalhos: {
                     'Content-Type': 'application/json'
                 },
                 corpo: '--data ${jsonData}'
-                corpo: '--data "{\"text\":\"${formattedText}\"}"'
             })
             .então(resposta => {
                 se (!resposta.Okey) {
