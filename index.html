@@ -24,8 +24,8 @@
                 return;
             }
 
-            const webhookUrl = 'https://eoa6k0b0sxvva4n.m.pipedream.net';
-            
+            const webhookUrl = 'URL_DO_SEU_WEBHOOK_NO_PIPEDREAM'; // Substitua pelo seu URL do Pipedream
+
             fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
@@ -38,11 +38,11 @@
                     alert('Mensagem enviada com sucesso!');
                     document.getElementById('slackForm').reset();
                 } else {
-                    alert('Erro ao enviar mensagem para o Slack.');
+                    alert('Erro ao enviar mensagem para o Pipedream.');
                 }
             })
             .catch(error => {
-                alert('Erro ao enviar mensagem para o Slack.');
+                alert('Erro ao enviar mensagem para o Pipedream.');
                 console.error('Erro:', error);
             });
         });
