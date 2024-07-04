@@ -1,92 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<! HTML DOCTYPE>
+<html lang="pt">
+<cabeça>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulário de Contato</title>
-    <style>
+    <estilo>
         /* Adicione seu CSS aqui */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+ corpo {
+ família de fontes: Arial, sans-serif;
+ margem: 20px;
         }
         .form-group {
-            margin-bottom: 15px;
+ margem-fundo: 15px;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
+ rótulo {
+ display: bloco;
+ margem-fundo: 5px;
         }
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+ entrada, área de texto {
+ largura: 100%;
+ preenchimento: 8px;
+ dimensionamento de caixa: borda-caixa;
         }
-        button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            cursor: pointer;
+ botão {
+ preenchimento: 10px 15px;
+ cor de fundo: #007BFF;
+ cor: #fff;
+ fronteira: nenhuma;
+ cursor: ponteiro;
         }
-    </style>
-</head>
-<body>
+    </estilo>
+</cabeça>
+<corpo>
     <h1>Formulário de Contato</h1>
-    <form id="contactForm">
-        <div class="form-group">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
+    <formulário id="contatoFormulário">
+        <div class="grupo-formulário">
+            <label for="nome">Nome:</label>
+            <input type="text" id="name" name="name" obrigatório>
+        </Div>
+        <div class="grupo-formulário">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
+            <input type="email" id="email" name="email" necessário>
+        </Div>
+        <div class="grupo-formulário">
             <label for="message">Mensagem:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
+            <textarea id="message" name="message" rows="5" obrigatório></textarea>
+        </Div>
         <button type="submit">Enviar</button>
-    </form>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+    </forma>
+    <roteiro>
+        documento.getElementById('contactForm').addEventListener('submit', função(evento) {
+            evento.preventDefault();
             
-            // Coleta os dados do formulário
-            const formData = new FormData(this);
+            Coleta os dados do formulário
+            const formData = novo FormData(este);
             const formObject = {};
-            formData.forEach((value, key) => {
-                formObject[key] = value;
+            formData.forEach((valor, chave) => {
+                formObject[key] = valor;
             });
 
-            // Converte os dados para JSON
-            const jsonData = JSON.stringify({ text: `Nome: ${formObject.name}, Email: ${formObject.email}, Mensagem: ${formObject.message}` });
+            Converte os dados para JSON
+            const jsonData = JSON.stringify({ text: 'Nome: ${formObject.name}, E-mail: ${formObject.email}, Mensagem: ${formObject.mensagem}' });
+            Formatação dos dados para o texto simples
+            const formattedText = 'Nome: ${formObject.nome}\nE-mail: ${formObject.email}\nMensagem: ${formObject.mensagem}';
 
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/1078f5728ranaagv4qsjmzbtxx66cu31';
-
-            // Envia os dados para o webhook
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
+@@ -72,7 +72,7 @@ <h1>Formulário de Contato</h1>
+                cabeçalhos: {
                     'Content-Type': 'application/json'
                 },
-                body: `--data ${jsonData}`
+                corpo: '--data ${jsonData}'
+                corpo: '--data "{\"text\":\"${formattedText}\"}"'
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+            .então(resposta => {
+                se (!resposta.Okey) {
+                    lançar novo erro('A resposta de rede não estava ok');
                 }
-                return response.json();
+                retorno de resposta.json();
             })
-            .then(data => {
+            .então(dados => {
                 console.log('Sucesso:', data);
             })
-            .catch(error => {
-                console.error('Erro:', error);
+            .catch(erro => {
+                console.error('Erro:', erro);
             });
         });
-    </script>
-</body>
-</html>
+    </roteiro>
+</corpo>
+</Html>
