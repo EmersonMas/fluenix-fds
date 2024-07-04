@@ -60,19 +60,16 @@
                 formObject[key] = value;
             });
 
-            // Formatação dos dados para o texto simples
-            const formattedText = `Nome: ${formObject.name}\nEmail: ${formObject.email}\nMensagem: ${formObject.message}`;
-
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/1078f5728ranaagv4qsjmzbtxx66cu31';
 
-            // Envia os dados para o webhook
+            // Envia os dados para o webhook do Make
             fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: `--data "{\"text\":\"${formattedText}\"}"`
+                body: JSON.stringify(formObject)
             })
             .then(response => {
                 if (!response.ok) {
