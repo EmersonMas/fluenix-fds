@@ -64,7 +64,7 @@
             const jsonData = JSON.stringify({ text: `Nome: ${formObject.name}, Email: ${formObject.email}, Mensagem: ${formObject.message}` });
 
             // URL do webhook Make
-            const webhookUrl = 'https://hook.us1.make.com/1078f5728ranaagv4qsjmzbtxx66cu31';
+            const webhookUrl = 'https://hook.us1.make.com/qpfmrqzmt04c7uvednm628jx95wst6kx';
 
             // Envia os dados para o webhook
             fetch(webhookUrl, {
@@ -82,9 +82,11 @@
             })
             .then(data => {
                 console.log('Sucesso:', data);
+                alert('Dados enviados com sucesso!');
             })
             .catch(error => {
                 console.error('Erro:', error);
+                alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente mais tarde.');
             });
         });
     </script>
