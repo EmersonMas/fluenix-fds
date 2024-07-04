@@ -66,22 +66,25 @@
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/5ux02n74yanf7xjmxsgzovae3mg5ts4v';
 
-            // Envia os dados para o webhook com 'mode: no-cors'
+            // Envia os dados para o webhook
             fetch(webhookUrl, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: jsonData
+                body: `--data ${jsonData}`
             })
             .then(response => {
-                console.log('Requisição enviada com sucesso, mas sem acesso aos headers e corpo da resposta.');
-                alert('Dados enviados com sucesso!');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Sucesso:', data);
             })
             .catch(error => {
-                console.error('Erro ao enviar a requisição:', error);
-                alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente mais tarde.');
+                console.error('Erro:', error);
             });
         });
     </script>
