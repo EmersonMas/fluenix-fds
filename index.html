@@ -48,7 +48,6 @@
         </div>
         <button type="submit">Enviar</button>
     </form>
-
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -59,32 +58,28 @@
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
-
             // Converte os dados para JSON
             const jsonData = JSON.stringify({ text: `Nome: ${formObject.name}, Email: ${formObject.email}, Mensagem: ${formObject.message}` });
 
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/5ux02n74yanf7xjmxsgzovae3mg5ts4v';
 
-            // Envia os dados para o webhook
+            // Envia os dados para o webhook com 'mode: no-cors'
             fetch(webhookUrl, {
                 method: 'POST',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: `--data ${jsonData}`
+                body: jsonData
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Sucesso:', data);
+                console.log('Requisição enviada com sucesso, mas sem acesso aos headers e corpo da resposta.');
+                alert('Dados enviados com sucesso!');
             })
             .catch(error => {
-                console.error('Erro:', error);
+                console.error('Erro ao enviar a requisição:', error);
+                alert('Ocorreu um erro ao enviar os dados. Por favor, tente novamente mais tarde.');
             });
         });
     </script>
