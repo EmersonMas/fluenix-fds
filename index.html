@@ -76,6 +76,8 @@
                 email: email
             };
 
+            console.log('Data to send:', data);
+
             fetch('https://eoa6k0b0sxvva4n.m.pipedream.net', {
                 method: 'POST',
                 headers: {
@@ -84,6 +86,7 @@
                 body: JSON.stringify(data)
             })
             .then(response => {
+                console.log('Response received:', response);
                 if (response.ok) {
                     return response.json();
                 }
