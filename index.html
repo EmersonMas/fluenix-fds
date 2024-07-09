@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Contato</title>
+    <title>Formulário de Contato Geral</title>
     <style>
         /* Adicione seu CSS aqui */
         body {
@@ -58,8 +58,10 @@
             formData.forEach((value, key) => {
                 formObject[key] = value;
             });
-            // Converte os dados para JSON
-            const jsonData = JSON.stringify({ text: `Nome: ${formObject.name}, Email: ${formObject.email}, Mensagem: ${formObject.message}` });
+            // Converte os dados para JSON com quebras de linha
+            const jsonData = JSON.stringify({
+                text: `Nome: ${formObject.name}\nEmail: ${formObject.email}\nMensagem: ${formObject.message}`
+            });
 
             // URL do webhook Make
             const webhookUrl = 'https://hook.us1.make.com/5ux02n74yanf7xjmxsgzovae3mg5ts4v';
